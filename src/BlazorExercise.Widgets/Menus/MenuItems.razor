@@ -1,0 +1,32 @@
+﻿<ul class="menuitems level-@(MenuLevel)">
+	<CascadingValue Value="@(MenuLevel + 1)" Name="@MenuUtils.PropertyNames.MenuLevel">
+		@ChildContent
+	</CascadingValue>
+</ul>
+
+@code {
+	[Parameter]
+	public int Blah { get; init; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+
+
+	[CascadingParameter(Name = MenuUtils.PropertyNames.MenuLevel)]
+	public required int MenuLevel { get; init; }
+
+	[CascadingParameter]
+	public MenuItem? ParentMenuItem { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		if (ParentMenuItem is not null)
+		{
+			//Console.WriteLine($"Child of {ParentMenuItem.Text} was initialized!");
+			ParentMenuItem.HasInitializedSubMenus = true;
+		}
+	}
+}

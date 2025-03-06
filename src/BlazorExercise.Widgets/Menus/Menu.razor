@@ -1,0 +1,20 @@
+﻿
+
+@{
+	<div class="menu">
+		<CascadingValue Name="@MenuUtils.PropertyNames.MenuLevel" Value="0">
+			<CascadingValue Value="@null" TValue="MenuItem">
+				<!--               ^^^^In case we're nested in another menu, don't pass it-->
+				@ChildContent
+			</CascadingValue>
+		</CascadingValue>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public int Blah { get; init; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+}

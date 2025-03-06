@@ -1,0 +1,43 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<Menu>
+	<MenuItems>
+		<MenuItem Text="item-1">
+			<MenuItems>
+				<MenuItem Text="item-1.1" OnClick="@OnMenuItemClicked" />
+				<MenuItem Text="item-1.2">
+					<MenuItems>
+						<MenuItem Text="item-1.2.1">
+							<MenuItems>
+								<MenuItem Text="item-1.2.1-a" OnClick="@OnMenuItemClicked" />
+								<MenuItem Text="item-1.2.1-b" OnClick="@OnMenuItemClicked" />
+							</MenuItems>
+						</MenuItem>
+						<MenuItem Text="item-1.2.2" OnClick="@OnMenuItemClicked" />
+					</MenuItems>
+				</MenuItem>
+			</MenuItems>
+		</MenuItem>
+		<MenuItem Text="item-2">
+			<MenuItems>
+				<MenuItem Text="item-2.1" OnClick="@OnMenuItemClicked" />
+			</MenuItems>
+		</MenuItem>
+		<MenuItem Text="item-3" ChildContent="null" OnClick="@OnMenuItemClicked" />
+		<MenuItem Text="Clear Log" ChildContent="null" OnClick="@(()=>Log="")" />
+	</MenuItems>
+</Menu>
+
+<InputTextArea @bind-Value="@Log" style="width: 100%; field-sizing: content" />
+
+@code {
+	private string Log { get; set; }
+		= "This is a debug log. You will see everything clicked here.";
+
+	void OnMenuItemClicked(MenuItemClickEventArgs args)
+	{
+		Log += ($"{Environment.NewLine}Clicked {args.Sender.Text}!");
+	}
+}

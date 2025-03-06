@@ -1,0 +1,47 @@
+﻿.menuitem {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 0.2rem;
+    margin: 0;
+    list-style: none; /*Hide built-in dot for the list item*/
+    width: max-content; /*Since items in submenus are rendered outside of their parent, this allows them to grow larger than said parent*/
+}
+
+    .menuitem:hover {
+        background: lightgray;
+    }
+
+    .menuitem:not(.with-child-menus):active{
+        /*Mouse hold effect - only when menu item is a leaf*/
+        color: red;
+    }
+
+    .menuitem:not(.expanded) > .content {
+        display: none;
+    }
+
+    .menuitem::before {
+        /*Center menu item's icon vertically to align with the text*/
+        content: "";
+        width: 0.7REM;
+        height: 0.7REM;
+        transform: translateY(50%);
+        margin-right: 0.2rem;
+        background-size: cover;
+    }
+
+    .menuitem.with-child-menus.level-1::before {
+        /*When submenus are displayed below, use down arrow as menu item icon*/
+        background-image: url("/_content/BlazorExercise.Widgets/down-circle-svgrepo-com.svg");
+    }
+
+    .menuitem.with-child-menus:not(.level-1)::before {
+        /*When submenus are displayed to the right, use right arrow as menu item icon*/
+        background-image: url("/_content/BlazorExercise.Widgets/right-circle-svgrepo-com.svg");
+    }
+
+    .menuitem:not(.with-child-menus)::before {
+        /*No submenus - use circle as menu item icon*/
+        background-image: url("/_content/BlazorExercise.Widgets/circle-svgrepo-com.svg");
+    }
